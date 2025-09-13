@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <style>
+            body {
+                background-color: white;
+                color: black; 
+                margin: 0;
+                padding: 10px;
+                font-family: Arial, sans-serif;
+            }
+        </style>
+    </head>
+    <body> 
+        Inventory: <hr>
+        <table>
+            <tr>
+                <th> &#10084; </th>
+                <th> &#x1F35E; </th>
+                <th> &#127795; </th>
+                <th> &#9881; </th>
+                <th> &#9679; </th>
+                <th> &#9876; </th>
+                <th> &#x1FA84; </th>
+                <th> &#128994; </th>
+                <th> &#x1F52E; </th>
+            </tr>
+            <tr>
+                <td id='hp'>0</td>
+                <td id='food'>0</td>
+                <td id='wood'>0</td>
+                <td id='coal'>0</td>
+                <td id='iron'>0</td>
+                <td id='tools'>0</td>
+                <td id='enchant'>0</td>
+                <td id='exp'>0</td>
+                <td id='endereyes'>0</td>
+
+            </tr>
+        </table>
+        <script> 
+            var queryString = new URLSearchParams(location.search);
+            hp.innerText = queryString.get("hp");
+            food.innerText = queryString.get("food");
+            wood.innerText = queryString.get("wood");
+            iron.innerText = queryString.get("iron");
+            coal.innerText = queryString.get("coal");
+            tools.innerText = queryString.get("tools");
+            enchant.innerText = queryString.get("enchant");
+            exp.innerText = queryString.get("exp");
+            endereyes.innerText = queryString.get("endereyes");
+
+        </script>
+    </body>
+</html>

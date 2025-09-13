@@ -1,0 +1,164 @@
+<html>
+    <head>
+        <title> Minecr*ft Game </title>
+        <link rel="icon" href="assets/minecraft_icon.png"/>
+        <style>
+        body {
+            margin: 0;
+            background-color: green;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        img#main-image {
+            display: block;
+            margin: 0 auto;
+            width: 100%; 
+            max-width: 1000px;
+        }
+
+        #message-bar {
+            background-color: black;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 1000px;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        #face {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        #message-text {
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .button-groups {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }      
+
+        .action-button {
+            background-color: #222;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .action-button:hover {
+            background-color: #444;
+        }
+
+        .action-button.major {
+            padding: 16px 26px;
+            font-size: 18px;
+        }
+
+        .action-button.minor {
+            padding: 10px 16px;
+            font-size: 14px;
+        }
+
+        iframe#inventory {
+            margin-top: 40px;
+            border: 2px solid rgb(255, 255, 255);
+        }
+    </style>
+    </head>
+    <body>
+        
+        <hr>
+        <img src="assets/Nether_Fortress.png" id="main-image">
+        <div id="message-bar">
+            <img src="assets/Steve.jpg" id="face">
+            <div id="message-text"> Inside the fortress is blazes! Killing them will give you ender eyes. </div>
+        </div>
+        <div class="button-container">
+            <div class="button-groups">
+                <div class="button-row major-buttons">
+                     <a class="action-button major" onclick="fightBlaze()"> Attack </a>
+                </div>
+                <div class="button-row-minor-buttons">
+                    <a id="nether" class="action-button minor" href="nether.html"> Return </a>
+                </div>
+            </div>
+        </div>
+        <iframe src="inventory.html" id="inventory" height="150" width="300"></iframe>
+        <script>
+            inventory.src += location.search;
+            nether.href += location.search;
+        var queryString = new URLSearchParams(location.search);
+        var hp = +queryString.get("hp");
+        var food = +queryString.get("food");
+        var wood = +queryString.get("wood");
+        var iron = +queryString.get("iron");
+        var coal = +queryString.get("coal");
+        var tools = +queryString.get("tools");
+        var enchant = +queryString.get("enchant");
+        var exp = +queryString.get("exp");
+        var endereyes= +queryString.get("endereyes");
+
+        function fightBlaze(){
+            const messageBox = document.getElementById("message-text");
+            if(tools == 0){
+                location.href = "nether_fortress_death.html?" + queryString.toString();
+            } else if(tools == 2 && enchant == 1){
+                queryString.set('endereyes', endereyes+2);
+                queryString.set('exp', exp+1);
+                location.search = queryString;
+                messageBox.innerHTML = 'You killed a blaze masterfully and took no damage. You have gained two ender eyes and one experience point.'
+            } else if(tools == 2) {
+                let newHp = hp - 3;
+                if (newHp <= 0) {
+                    queryString.set('hp', newHp);
+                    location.href = "nether_fortress_death.html?" + queryString.toString();
+                } else {
+                    queryString.set('hp', newHp);
+                    queryString.set('exp', exp+1);
+                    queryString.set('endereyes', endereyes+2);
+                    location.search = queryString;
+                    'With mediocre gear, you kill a blaze and take damage. You have gained two ender eyes and one experience point.'
+                }
+            } else if(tools == 1) {
+                let newHp = hp - 6;
+                if (newHp <= 0) {
+                    queryString.set('hp', newHp);
+                    location.href = "nether_fortress_death.html?" + queryString.toString();
+                } else {
+                    queryString.set('hp', newHp);
+                    queryString.set('exp', exp+1);
+                    queryString.set('endereyes', endereyes+2);
+                    location.search = queryString;
+                    'With subpar gear, you kill a blaze and take major damage. You have gained two ender eyes and one experience point.'
+                }
+            }
+        }
+        </script>
+    </body>
+</html>
